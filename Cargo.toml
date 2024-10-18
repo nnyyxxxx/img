@@ -1,6 +1,25 @@
 [package]
 name = "img"
 version = "0.1.0"
+authors = ["Nyx <nnyyxxxx@protonmail.com>", "Adam Perkowski <adas1per@protonmail.com>"]
+description = "img is a new image viewer, audio player, and video player built in rust!"
+readme = "readme.md"
+repository = "https://github.com/nnyyxxxx/img.git"
+keywords = [
+    "image",
+    "audio",
+    "video",
+    "player",
+    "viewer",
+]
+categories = ["media"]
 edition = "2021"
 
 [dependencies]
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true
+opt-level = 3
