@@ -1,7 +1,7 @@
 mod gui;
 
 use gtk::{prelude::*, Application};
-use std::env;
+use std::{env, path::Path};
 
 fn main() {
     let application = Application::builder()
@@ -17,12 +17,22 @@ fn main() {
         }
 
         let image_path = &args[1];
+        if !Path::new(image_path).exists() {
+            eprintln!("Error: file not found: {}", image_path);
+            std::process::exit(1);
+        }
+
         gui::create_window(app, image_path);
     });
 
     application.connect_open(|app, files, _| {
         if let Some(file) = files.first() {
-            gui::create_window(app, file.path().unwrap().to_str().unwrap());
+            let path = file.path().unwrap();
+            if path.exists() {
+                gui::create_window(app, path.to_str().unwrap());
+            } else {
+                eprintln!("Error: file not found: {}", path.display());
+            }
         }
     });
 
