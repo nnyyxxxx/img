@@ -1,5 +1,4 @@
-use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Picture};
+use gtk::{prelude::*, Application, ApplicationWindow, Picture, ScrolledWindow};
 use std::path::Path;
 
 pub fn create_window(app: &Application, image_path: &str) {
@@ -20,7 +19,7 @@ pub fn create_window(app: &Application, image_path: &str) {
     picture.set_can_shrink(true);
     picture.set_content_fit(gtk::ContentFit::Cover);
 
-    let scrolled_window = gtk::ScrolledWindow::builder()
+    let scrolled_window = ScrolledWindow::builder()
         .hexpand(true)
         .vexpand(true)
         .child(&picture)
