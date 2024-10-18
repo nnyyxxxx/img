@@ -1,7 +1,7 @@
 <div align='center'>
 
 ## img 🚀🦀
-A CLI image viewer made with GTK4 and Rust. 🚀🦀<br>
+A lightweight CLI image viewer made with GTK4 and Rust. 🚀🦀<br>
 
 ![Preview](.github/preview.png)
 
