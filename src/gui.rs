@@ -1,5 +1,5 @@
 use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Image};
+use gtk::{Application, ApplicationWindow, Picture};
 use std::path::Path;
 
 pub fn create_window(app: &Application, image_path: &str) {
@@ -10,13 +10,22 @@ pub fn create_window(app: &Application, image_path: &str) {
         .default_height(600)
         .build();
 
-    let image = if Path::new(image_path).exists() {
-        Image::from_file(image_path)
+    let picture = if Path::new(image_path).exists() {
+        Picture::for_filename(image_path)
     } else {
         eprintln!("Error: Image file not found: {}", image_path);
-        Image::new()
+        Picture::new()
     };
 
-    window.set_child(Some(&image));
+    picture.set_can_shrink(true);
+    picture.set_content_fit(gtk::ContentFit::Cover);
+
+    let scrolled_window = gtk::ScrolledWindow::builder()
+        .hexpand(true)
+        .vexpand(true)
+        .child(&picture)
+        .build();
+
+    window.set_child(Some(&scrolled_window));
     window.present();
 }
