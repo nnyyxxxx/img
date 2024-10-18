@@ -16,6 +16,8 @@ categories = ["media"]
 edition = "2021"
 
 [dependencies]
+gtk = { version = "0.6.6", package = "gtk4", features = ["v4_8"] }
+gdk-pixbuf = "0.17.0"
 
 [profile.release]
 lto = "fat"
